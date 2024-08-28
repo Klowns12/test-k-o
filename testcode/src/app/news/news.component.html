@@ -1,0 +1,42 @@
+<div class="container">
+    <h3>ข่าวประชาสัมพันธ์</h3>
+    <button (click)="openPopup()" class="btn btn-success">เพิ่มข่าว</button>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ลำดับ</th>
+          <th>ชื่อเรื่อง</th>
+          <th>วันที่สร้าง</th>
+          <th>จัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let news of newsList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ news.name }}</td>
+          <td>{{ news.updatedDate }}</td>
+          <td>
+            <button (click)="viewNews(news)" class="btn btn-info">🔍</button>
+            <button (click)="editNews(news)" class="btn btn-warning">✏️</button>
+            <button (click)="deleteNews(news.id)" class="btn btn-danger">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Popup -->
+    <div *ngIf="showPopup" class="popup">
+      <div class="popup-content">
+        <h4>รายละเอียดข่าวประชาสัมพันธ์</h4>
+        <label>ชื่อเรื่อง:</label>
+        <input [(ngModel)]="selectedNews.name" type="text">
+        <label>เนื้อหา:</label>
+        <textarea [(ngModel)]="selectedNews.detail"></textarea>
+        <label>สถานะ:</label>
+        <input type="checkbox" [(ngModel)]="selectedNews.status">
+        <button (click)="closePopup()">ปิด</button>
+      </div>
+    </div>
+  </div>
+  
